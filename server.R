@@ -21,7 +21,8 @@ Server<- function(input, output) {
   })
   output$cooccurrence_plot = renderPlot({
     inputText <-  as.character(Text_Input_Data())
-    model = udpipe_load_model(file="english-ewt-ud-2.4-190531.udpipe")
+    model <- udpipe_download_model(language = "english")
+    model <- udpipe_load_model(model$file_model)
     Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
    
     Data <- as.data.frame(Data)
@@ -50,7 +51,8 @@ Server<- function(input, output) {
 
     output$mytable1 <- DT::renderDataTable({
       inputText <-  as.character(Text_Input_Data())
-      model = udpipe_load_model(file="./english-ewt-ud-2.4-190531.udpipe")
+      model <- udpipe_download_model(language = "english")
+      model <- udpipe_load_model(model$file_model)
       Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
       Data <- as.data.frame(Data)
       Data <-Data[,-4]
@@ -61,7 +63,8 @@ Server<- function(input, output) {
       filename <- "Data.csv",
       content = function(file) {
         inputText <-  as.character(Text_Input_Data())
-        model = udpipe_load_model(file="./english-ewt-ud-2.4-190531.udpipe")
+        model <- udpipe_download_model(language = "english")
+        model <- udpipe_load_model(model$file_model)
         Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
         Data <- as.data.frame(Data)
         Data <-Data[,-4]
@@ -70,7 +73,8 @@ Server<- function(input, output) {
     )
   output$Word_Cloud_PLot = renderPlot({
     inputText <-  as.character(Text_Input_Data())
-    model = udpipe_load_model(file="./english-ewt-ud-2.4-190531.udpipe")
+    model <- udpipe_download_model(language = "english")
+    model <- udpipe_load_model(model$file_model)
     Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
     Data <- as.data.frame(Data)
     
