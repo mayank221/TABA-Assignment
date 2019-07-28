@@ -21,7 +21,7 @@ Server<- function(input, output) {
   })
   output$cooccurrence_plot = renderPlot({
     inputText <-  as.character(Text_Input_Data())
-    model = udpipe_load_model(file="./english-ewt-ud-2.4-190531.udpipe")
+    model = udpipe_load_model(file="english-ewt-ud-2.4-190531.udpipe")
     Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
    
     Data <- as.data.frame(Data)
