@@ -57,6 +57,7 @@ shinyServer(function(input, output) {
       Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
       Data <- as.data.frame(Data)
       Data <-Data[,-4]
+      Data <- subset(Data, Data$xpos %in% input$checkGroup)
       DT::datatable(Data,options = list(pageLength = 100,orderClasses = TRUE),rownames = FALSE)
     })
     output$Data <- downloadHandler(
@@ -67,6 +68,7 @@ shinyServer(function(input, output) {
         Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
         Data <- as.data.frame(Data)
         Data <-Data[,-4]
+        Data <- subset(Data, Data$xpos %in% input$checkGroup)
         write.csv(Data, file, row.names = FALSE)
       }
     )
