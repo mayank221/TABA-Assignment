@@ -20,6 +20,3 @@ library(stringr)
 library(readr)
 library(rvest)
 
-setwd("C:/Work/ISB/")
-getwd()
-
