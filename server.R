@@ -10,7 +10,9 @@ library(stringr)
 library(readr)
 library(rvest)
 
-Server<- function(input, output) {
+
+
+shinyServer(function(input, output) {
   Text_Input_Data <- reactive({
     
     if (is.null(input$Text_Input)) {   
@@ -43,7 +45,7 @@ Server<- function(input, output) {
       theme_graph(base_family = "Arial Narrow") +  
       theme(legend.position = "none") +
                        
-                       labs(title = "Cooccurrence Plot", subtitle = "Speech TAGS as chosen")
+                       labs(title = "Cooccurrence Plot")
   })
 
 
@@ -73,6 +75,7 @@ Server<- function(input, output) {
     )
   output$Word_Cloud_PLot = renderPlot({
     inputText <-  as.character(Text_Input_Data())
+    inputText
     model <- udpipe_download_model(language = "english")
     model <- udpipe_load_model(model$file_model)
     Data <- udpipe_annotate(model, x = inputText, doc_id = seq_along(inputText))
@@ -87,4 +90,4 @@ Server<- function(input, output) {
               random.order = FALSE, 
               colors = brewer.pal(6, "Dark2"))
   })
-}
+})
