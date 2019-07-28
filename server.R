@@ -1,4 +1,14 @@
-
+library(shiny)
+library(udpipe)
+library(textrank)
+library(lattice)
+library(igraph)
+library(ggraph)
+library(ggplot2)
+library(wordcloud)
+library(stringr)
+library(readr)
+library(rvest)
 
 Server<- function(input, output) {
   Text_Input_Data <- reactive({
